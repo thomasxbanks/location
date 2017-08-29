@@ -19,7 +19,7 @@ document.getElementById('geolocation').addEventListener('submit', function (e) {
       }
       console.log(point1)
       var uod = document.getElementById('uod').options[document.getElementById('uod').selectedIndex].value
-      var phpEndpoint = `/?name=${point1.name.replace(/ /g, '+')}&lat=${point1.lat}&lng=${point1.lng}&uod=${uod}`
+      var phpEndpoint = `/location/?name=${point1.name.replace(/ /g, '+')}&lat=${point1.lat}&lng=${point1.lng}&uod=${uod}`
 
       window.location.href = phpEndpoint
     }
