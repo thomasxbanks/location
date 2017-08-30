@@ -27,7 +27,7 @@ document.getElementById('useCurrentLocation').addEventListener('click', function
         lng: response['location']['lng']
       }
       
-      document.querySelector('main').innerHTML += response
+      document.querySelector('main').innerHTML = JSON.stringify(response)
 
       var uod = document.getElementById('uod').options[document.getElementById('uod').selectedIndex].value
       var phpEndpoint = ENV + `?name=${point1.name.replace(/ /g, '+')}&lat=${point1.lat}&lng=${point1.lng}&uod=${uod}`
