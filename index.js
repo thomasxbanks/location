@@ -66,7 +66,7 @@ document.getElementById('geolocation').addEventListener('submit', function (e) {
 })
 
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2, uod) {
-  if (uod === 'miles') {
+  if (uod === 'mi') {
     R = 3958; // Earth's radius (miles)
   } else {
     R = 6371; // Earth's radius (kilometers)
@@ -157,11 +157,11 @@ function makeRow(point1, point2){
   return `
     <tr>
       <td>${point2.name}</td>
-      <td>${point2.distance} ${uod}</td>
+      <td>${point2.distance}<span class="muted-text">${uod}</span></td>
     </tr>
   `
 }
 document.querySelector('#from').innerText = point1.name.replace(/\+/g," ")
 for (i = 0; i < points2.length; i++) {
-  document.querySelector('table').innerHTML += makeRow(point1, points2[i])
+  document.getElementsByTagName('tbody')[0].innerHTML += makeRow(point1, points2[i])
 };

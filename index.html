@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <link href="https://fonts.googleapis.com/css?family=Fira+Mono" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Encode+Sans" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -18,8 +18,8 @@
         <label>Location: <input name="address" type="text" value=""></label>
         <label>
             <select name="uod" id="uod">
-              <option selected value="miles">Miles</option>
-              <option value="kilometers">Kilometers</option>
+              <option selected value="mi">Miles</option>
+              <option value="km">Kilometers</option>
             </select>
           </label>
           <button id="useCurrentLocation" type="submit" class="material-icons">my_location</button>
@@ -30,10 +30,12 @@
     <section>
       <h2 id="from"></h2>
       <table>
-        <tr>
-          <th>To</th>
-          <th>Distance</th>
-        </tr>
+        <tbody>
+          <tr>
+            <th>To</th>
+            <th>Distance</th>
+          </tr>
+        </tbody>
       </table>
     </section>
   </main>
