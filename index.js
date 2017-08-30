@@ -6,7 +6,7 @@ if (thisUrl.indexOf('localhost') > -1) {
   var ENV = '/location/'
 }
 
-if (thisUrl.indexOf('https') > -1){
+if (thisUrl.indexOf('https') > -1) {
   document.getElementById('useCurrentLocation').style.display = 'inline-block'
 } else {
   document.getElementById('useCurrentLocation').style.display = 'none'
@@ -14,32 +14,32 @@ if (thisUrl.indexOf('https') > -1){
 
 var geoCodingUri = 'https://maps.googleapis.com/maps/api/geocode/json'
 var apiKey = {
-  geoLocationApiKey: 'AIzaSyCeCnGgRtHiCQVEn9Fx0afqPY8w9C63LUQ',
   geoCodingApiKey: 'AIzaSyAGEwaaEBjHQPCwSw-h-VBAFSK5vk2fLB8'
 }
 var loader = document.getElementById('loader')
 // Use current location
-document.getElementById('useCurrentLocation').addEventListener('click', function(e){
-      loader.setAttribute('data-state', 'loading')
-      var startPos
+document.getElementById('useCurrentLocation').addEventListener('click', function (e) {
+  e.preventDefault()
+  loader.setAttribute('data-state', 'loading')
+  var startPos
 
-      var geoSuccess = function(position) {
-        startPos = position
+  var geoSuccess = function (position) {
+    startPos = position
 
-        var point1 = {
-          name: 'Your current location',
-          lat: startPos.coords.latitude,
-          lng: startPos.coords.longitude
-        }
-        
-        var uod = document.getElementById('uod').options[document.getElementById('uod').selectedIndex].value
-        var phpEndpoint = ENV + `?name=${point1.name.replace(/ /g, '+')}&lat=${point1.lat}&lng=${point1.lng}&uod=${uod}`
-        
-        window.location.href = phpEndpoint
-      }
+    var point1 = {
+      name: 'Your current location',
+      lat: startPos.coords.latitude,
+      lng: startPos.coords.longitude
+    }
 
-      navigator.geolocation.getCurrentPosition(geoSuccess)
-      
+    var uod = document.getElementById('uod').options[document.getElementById('uod').selectedIndex].value
+    var returnUri = ENV + `?name=${point1.name.replace(/ /g, '+')}&lat=${point1.lat}&lng=${point1.lng}&uod=${uod}`
+
+    window.location.href = returnUri
+  }
+
+  navigator.geolocation.getCurrentPosition(geoSuccess)
+
 })
 
 // use different location
@@ -47,7 +47,7 @@ document.getElementById('geolocation').addEventListener('submit', function (e) {
   e.preventDefault()
   loader.setAttribute('data-state', 'loading')
   var rawValue = e.currentTarget.getElementsByTagName('input')[0].value
-  var apiEndpoint = '?address=' + rawValue.replace(' ', '+') + ', United Kingdom&key=' + apiKey.geoCodingApiKey
+  var apiEndpoint = '?address=' + rawValue.replace(' ', '+') + '&key=' + apiKey.geoCodingApiKey
   console.log('submit', apiEndpoint)
 
   var xmlhttp = new XMLHttpRequest()
@@ -63,9 +63,9 @@ document.getElementById('geolocation').addEventListener('submit', function (e) {
       }
       console.log(point1)
       var uod = document.getElementById('uod').options[document.getElementById('uod').selectedIndex].value
-      var phpEndpoint = ENV + `?name=${point1.name.replace(/ /g, '+')}&lat=${point1.lat}&lng=${point1.lng}&uod=${uod}`
+      var returnUri = ENV + `?name=${point1.name.replace(/ /g, '+')}&lat=${point1.lat}&lng=${point1.lng}&uod=${uod}`
 
-      window.location.href = phpEndpoint
+      window.location.href = returnUri
     }
   }
   xmlhttp.open("GET", geoCodingUri + apiEndpoint, true)
@@ -79,16 +79,15 @@ function getDistance(point1, point2, uod) {
   } else {
     R = 6371 // Earth's radius (kilometers)
   }
-  var dLat = deg2rad(point2.lat-point1.lat);  // deg2rad below
-  var dLon = deg2rad(point2.lng-point1.lng); 
-  var a = 
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(deg2rad(point1.lat)) * Math.cos(deg2rad(point2.lat)) * 
-    Math.sin(dLon/2) * Math.sin(dLon/2)
-    ; 
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+  var dLat = deg2rad(point2.lat - point1.lat); // deg2rad below
+  var dLon = deg2rad(point2.lng - point1.lng);
+  var a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(point1.lat)) * Math.cos(deg2rad(point2.lat)) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
   var d = R * c // Distance in uod
-  
+
   return d.toFixed(2)
 }
 
@@ -98,14 +97,14 @@ function deg2rad(deg) {
 
 function findGetParameter(parameterName) {
   var result = null,
-      tmp = [];
+    tmp = [];
   location.search
-      .substr(1)
-      .split("&")
-      .forEach(function (item) {
-        tmp = item.split("=");
-        if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
-      });
+    .substr(1)
+    .split("&")
+    .forEach(function (item) {
+      tmp = item.split("=");
+      if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+    });
   return result;
 }
 var point1 = {
@@ -157,11 +156,11 @@ for (i = 0; i < points2.length; i++) {
   points2[i]['distance'] = getDistance(point1, points2[i], uod)
 }
 
-points2.sort(function(a, b) {
+points2.sort(function (a, b) {
   return parseFloat(a.distance) - parseFloat(b.distance);
 });
 
-function makeRow(point1, point2){
+function makeRow(point1, point2) {
   return `
     <tr>
       <td>${point2.name}</td>
@@ -169,7 +168,7 @@ function makeRow(point1, point2){
     </tr>
   `
 }
-document.querySelector('#from').innerText = point1.name.replace(/\+/g," ")
+document.querySelector('#from').innerText = point1.name.replace(/\+/g, " ")
 for (i = 0; i < points2.length; i++) {
   document.getElementsByTagName('tbody')[0].innerHTML += makeRow(point1, points2[i])
 };
