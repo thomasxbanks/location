@@ -13,7 +13,6 @@ if (thisUrl.indexOf('https') > -1){
 }
 
 var geoCodingUri = 'https://maps.googleapis.com/maps/api/geocode/json'
-var geoLocationUri = 'https://www.googleapis.com/geolocation/v1/geolocate?key='
 var apiKey = {
   geoLocationApiKey: 'AIzaSyCeCnGgRtHiCQVEn9Fx0afqPY8w9C63LUQ',
   geoCodingApiKey: 'AIzaSyAGEwaaEBjHQPCwSw-h-VBAFSK5vk2fLB8'

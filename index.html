@@ -15,8 +15,8 @@
   <main>
     <section id="loader">
       <form id="geolocation" action="">
-        <fieldset>
-          <label>Find your nearest bar:</label>
+        <!--<fieldset>
+          <label>Find nearest:</label>
           <input name="address" type="text" value="" placeholder="city, address, or postcode">
         </fieldset>
         <fieldset>
@@ -28,7 +28,15 @@
         <fieldset>
           <button id="useSearchLocation" type="submit"><span class="material-icons">search</span> Search</button>
           <button id="useCurrentLocation"><span class="material-icons">my_location</span> Use current location</button>
-        </fieldset>
+        </fieldset>-->
+
+          <input name="address" type="text" value="" placeholder="city, address, or postcode">
+          <select name="uod" id="uod">
+            <option selected value="mi">Miles</option>
+            <option value="km">Kilometers</option>
+          </select>
+          <button id="useSearchLocation" type="submit"><span class="material-icons">search</span> Search</button>
+          <button id="useCurrentLocation"><span class="material-icons">my_location</span> Use current location</button>
       </form>
     </section>
     <section>
