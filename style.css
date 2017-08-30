@@ -16,9 +16,47 @@ body {
 
 section {
   background: white;
-  box-shadow: 0 0 0.25rem rgba(0,0,0,0.1);
+  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.1);
   padding: 1rem;
   margin: 1rem;
+  position: relative;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: stretch;
+  position: relative;
+}
+
+fieldset {
+  padding: 0.5rem 0;
+  border: 0;
+  line-height: 24px;
+  flex-grow: 1;
+}
+
+input,
+select {
+  width: 100%;
+  border-radius: 0.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 0.5rem;
+}
+
+select {
+  -webkit-appearance: none;
+}
+
+button {
+  border-radius: 0.25rem;
+  border: 1px solid rgba(0,0,0,0.3);
+  margin: 0 0.5rem;
+  padding: 0.125rem;
+  background: rgba(0,0,0,0.1);
 }
 
 table {
@@ -35,14 +73,44 @@ th {
   color: whitesmoke;
 }
 
-th:first-child, td:first-child {
+th:first-child,
+td:first-child {
   text-align: left;
 }
 
-th:last-child, td:last-child {
+th:last-child,
+td:last-child {
   text-align: right;
 }
 
-th, td {
+th,
+td {
   padding: 0.5rem;
+}
+
+[data-state="loading"]:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0.125rem;
+  background: slategray;
+  animation: loading infinite 1000ms;
+}
+
+
+@keyframes loading {
+  0% {
+    width: 0;
+    left: 0;
+  }
+  50% {
+    width: 66.66%;
+    left: 0;
+  }
+  100% {
+    left: 100%;
+    width: 0%;
+  }
 }

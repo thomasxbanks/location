@@ -12,10 +12,10 @@ var apiKey = {
   geoLocationApiKey: 'AIzaSyCeCnGgRtHiCQVEn9Fx0afqPY8w9C63LUQ',
   geoCodingApiKey: 'AIzaSyAGEwaaEBjHQPCwSw-h-VBAFSK5vk2fLB8'
 }
-
+var loader = document.getElementById('loader')
 // Use current location
 document.getElementById('useCurrentLocation').addEventListener('click', function(e){
-  
+      loader.setAttribute('data-state', 'loading')
       var startPos;
       var geoSuccess = function(position) {
         startPos = position;
@@ -38,6 +38,7 @@ document.getElementById('useCurrentLocation').addEventListener('click', function
 // use different location
 document.getElementById('geolocation').addEventListener('submit', function (e) {
   e.preventDefault()
+  loader.setAttribute('data-state', 'loading')
   var rawValue = e.currentTarget.getElementsByTagName('input')[0].value
   var apiEndpoint = '?address=' + rawValue.replace(' ', '+') + '&key=' + apiKey.geoCodingApiKey
   console.log('submit', apiEndpoint)

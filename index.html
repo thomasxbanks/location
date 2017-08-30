@@ -13,18 +13,23 @@
 
 <body>
   <main>
-    <section>
+    <section id="loader">
       <form id="geolocation" action="">
-        <label>Location: <input name="address" type="text" value=""></label>
-        <label>
+        <fieldset>
+          <label>Location: <input name="address" type="text" value=""></label>
+        </fieldset>
+        <fieldset>
+          <label>
             <select name="uod" id="uod">
               <option selected value="mi">Miles</option>
               <option value="km">Kilometers</option>
             </select>
           </label>
-          <button id="useCurrentLocation" type="submit" class="material-icons">my_location</button>
+        </fieldset>
+        <fieldset>
           <button id="useSearchLocation" type="submit" class="material-icons">search</button>
-        
+          <button id="useCurrentLocation" class="material-icons">my_location</button>
+        </fieldset>
       </form>
     </section>
     <section>
