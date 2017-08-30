@@ -1,3 +1,11 @@
+// Environment variables
+var thisUrl = window.location.href
+if (thisUrl.indexOf('thomasxbanks') > -1) {
+  var ENV = '/location/'
+} else {
+  var ENV = '/'
+}
+
 var geoCodingUri = 'https://maps.googleapis.com/maps/api/geocode/json'
 var geoLocationUri = 'https://www.googleapis.com/geolocation/v1/geolocate?key='
 var apiKey = {
@@ -20,7 +28,7 @@ document.getElementById('useCurrentLocation').addEventListener('click', function
       }
       
       var uod = document.getElementById('uod').options[document.getElementById('uod').selectedIndex].value
-      var phpEndpoint = `/?name=${point1.name.replace(/ /g, '+')}&lat=${point1.lat}&lng=${point1.lng}&uod=${uod}`
+      var phpEndpoint = ENV + `?name=${point1.name.replace(/ /g, '+')}&lat=${point1.lat}&lng=${point1.lng}&uod=${uod}`
       
       window.location.href = phpEndpoint
     }
@@ -50,7 +58,7 @@ document.getElementById('geolocation').addEventListener('submit', function (e) {
       }
       console.log(point1)
       var uod = document.getElementById('uod').options[document.getElementById('uod').selectedIndex].value
-      var phpEndpoint = `/location/?name=${point1.name.replace(/ /g, '+')}&lat=${point1.lat}&lng=${point1.lng}&uod=${uod}`
+      var phpEndpoint = ENV + `?name=${point1.name.replace(/ /g, '+')}&lat=${point1.lat}&lng=${point1.lng}&uod=${uod}`
 
       window.location.href = phpEndpoint
     }
