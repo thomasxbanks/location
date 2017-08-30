@@ -1,9 +1,40 @@
-var geoLocationUri = 'https://maps.googleapis.com/maps/api/geocode/json';
-var apiKey = 'AIzaSyDl9pat0bkxxhnHuZjt4NQ8KbJ3VGRFcoo'
+var geoCodingUri = 'https://maps.googleapis.com/maps/api/geocode/json'
+var geoLocationUri = 'https://www.googleapis.com/geolocation/v1/geolocate?key='
+var apiKey = {
+  geoLocationApiKey: 'AIzaSyCeCnGgRtHiCQVEn9Fx0afqPY8w9C63LUQ',
+  geoCodingApiKey: 'AIzaSyAGEwaaEBjHQPCwSw-h-VBAFSK5vk2fLB8'
+}
+
+// Use current location
+document.getElementById('useCurrentLocation').addEventListener('click', function(e){
+  var xmlhttp = new XMLHttpRequest()
+  xmlhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      var response = JSON.parse(this.responseText)
+      // log for debug
+      console.info(this.responseText)
+      var point1 = {
+        name: 'Your current location',
+        lat: response['location']['lat'],
+        lng: response['location']['lng']
+      }
+      
+      var uod = document.getElementById('uod').options[document.getElementById('uod').selectedIndex].value
+      var phpEndpoint = `/?name=${point1.name.replace(/ /g, '+')}&lat=${point1.lat}&lng=${point1.lng}&uod=${uod}`
+      
+      window.location.href = phpEndpoint
+    }
+  }
+  console.log(geoLocationUri + apiKey.geoLocationApiKey)
+  xmlhttp.open("POST", geoLocationUri + apiKey.geoLocationApiKey, true)
+  xmlhttp.send()
+})
+
+// use different location
 document.getElementById('geolocation').addEventListener('submit', function (e) {
   e.preventDefault()
   var rawValue = e.currentTarget.getElementsByTagName('input')[0].value
-  var apiEndpoint = '?address=' + rawValue.replace(' ', '+') + '&key=' + apiKey
+  var apiEndpoint = '?address=' + rawValue.replace(' ', '+') + '&key=' + apiKey.geoCodingApiKey
   console.log('submit', apiEndpoint)
 
   var xmlhttp = new XMLHttpRequest()
@@ -24,7 +55,7 @@ document.getElementById('geolocation').addEventListener('submit', function (e) {
       window.location.href = phpEndpoint
     }
   }
-  xmlhttp.open("GET", geoLocationUri + apiEndpoint, true)
+  xmlhttp.open("GET", geoCodingUri + apiEndpoint, true)
   xmlhttp.send()
 
 })
@@ -122,8 +153,7 @@ function makeRow(point1, point2){
     <tr>
       <td>${point1.name.replace(/\+/g, ' ')}</td>
       <td>${point2.name}</td>
-      <td>${point2.distance}</td>
-      <td>${uod}</td>
+      <td>${point2.distance} ${uod}</td>
     </tr>
   `
 }
