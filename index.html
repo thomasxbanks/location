@@ -6,31 +6,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <link href="https://fonts.googleapis.com/css?family=Fira+Mono" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
   <main>
-    <form id="geolocation" action="">
-      <label>Location: <input name="address" type="text" value=""></label>
-      <label>
+    <section>
+      <form id="geolocation" action="">
+        <label>Location: <input name="address" type="text" value=""></label>
+        <label>
             <select name="uod" id="uod">
               <option selected value="miles">Miles</option>
               <option value="kilometers">Kilometers</option>
             </select>
           </label>
-      <button id="submitPostcode" type="submit" class="material-icons">search</button>
-      <button id="useCurrentLocation" type="submit" class="material-icons">my_location</button>
-    </form>
-    <br><br>
-    <table>
-      <tr>
-        <th>From</th>
-        <th>To</th>
-        <th>Distance</th>
-      </tr>
-    </table>
+          <button id="useCurrentLocation" type="submit" class="material-icons">my_location</button>
+        <button id="submitPostcode" type="submit" class="material-icons">search</button>
+        
+      </form>
+    </section>
+    <section>
+      <table>
+        <tr>
+          <th>From</th>
+          <th>To</th>
+          <th>Distance</th>
+        </tr>
+      </table>
+    </section>
   </main>
   <script src="index.js"></script>
 </body>

@@ -1,6 +1,7 @@
 body {
-  font-family: monospace;
+  font-family: 'Fira Mono', monospace;
   margin: 0;
+  background: whitesmoke;
 }
 
 main {
@@ -18,26 +19,38 @@ th {
   background: #ececec;
   text-align: left;
   padding: 0.25rem;
-  width: auto;
 }
 
 td {
   padding: 0.25rem;
-  width: auto;
+}
+
+td:last-child,
+th:last-child {
+  text-align: right;
 }
 
 form {
   width: 100%;
+
 }
 
 label,
-input {
+input,
+select {
   display: inline-block;
-  vertical-align: top;
   line-height: 24px;
 }
 
+
 input {
+  padding: 0 0.25rem;
+  border: 1px solid rgba(0,0,0,0.3);
+  border-radius: 0.25rem;
+}
+
+select {
+  -webkit-appearance: none;
   padding: 0 0.25rem;
 }
 
@@ -45,6 +58,15 @@ button {
   -webkit-appearance: none;
   border: none;
   background: #ececec;
-  padding: 0.125rem;
-  margin: 0;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  float: right;
+}
+
+section {
+  background: white;
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
