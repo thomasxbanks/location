@@ -5,6 +5,7 @@ if (thisUrl.indexOf('localhost') > -1) {
 } else {
   var ENV = '/location/'
 }
+
 if (thisUrl.indexOf('https') > -1){
   document.getElementById('useCurrentLocation').style.display = 'inline-block'
 } else {
@@ -47,7 +48,7 @@ document.getElementById('geolocation').addEventListener('submit', function (e) {
   e.preventDefault()
   loader.setAttribute('data-state', 'loading')
   var rawValue = e.currentTarget.getElementsByTagName('input')[0].value
-  var apiEndpoint = '?address=' + rawValue.replace(' ', '+') + '&key=' + apiKey.geoCodingApiKey
+  var apiEndpoint = '?address=' + rawValue.replace(' ', '+') + ', United Kingdom&key=' + apiKey.geoCodingApiKey
   console.log('submit', apiEndpoint)
 
   var xmlhttp = new XMLHttpRequest()
@@ -73,27 +74,27 @@ document.getElementById('geolocation').addEventListener('submit', function (e) {
 
 })
 
-function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2, uod) {
+function getDistance(point1, point2, uod) {
   if (uod === 'mi') {
-    R = 3958; // Earth's radius (miles)
+    R = 3958 // Earth's radius (miles)
   } else {
-    R = 6371; // Earth's radius (kilometers)
+    R = 6371 // Earth's radius (kilometers)
   }
-  var dLat = deg2rad(lat2-lat1);  // deg2rad below
-  var dLon = deg2rad(lon2-lon1); 
+  var dLat = deg2rad(point2.lat-point1.lat);  // deg2rad below
+  var dLon = deg2rad(point2.lng-point1.lng); 
   var a = 
     Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.cos(deg2rad(point1.lat)) * Math.cos(deg2rad(point2.lat)) * 
     Math.sin(dLon/2) * Math.sin(dLon/2)
     ; 
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-  var d = R * c; // Distance in uod
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+  var d = R * c // Distance in uod
   
-  return d.toFixed(2);
+  return d.toFixed(2)
 }
 
 function deg2rad(deg) {
-  return deg * (Math.PI/180)
+  return deg * (Math.PI / 180)
 }
 
 function findGetParameter(parameterName) {
@@ -154,7 +155,7 @@ var points2 = [{
 ]
 
 for (i = 0; i < points2.length; i++) {
-  points2[i]['distance'] = getDistanceFromLatLonInKm(point1.lat, point1.lng, points2[i].lat, points2[i].lng, uod)
+  points2[i]['distance'] = getDistance(point1, points2[i], uod)
 }
 
 points2.sort(function(a, b) {
