@@ -14,6 +14,12 @@ body {
   font-size: 1rem;
 }
 
+main {
+  max-width: 1200px;
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+
 section {
   background: white;
   box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.1);
@@ -39,9 +45,19 @@ fieldset {
   flex-grow: 1;
 }
 
+fieldset:last-child {
+  text-align: right;
+}
+
+label {
+  display: block;
+  padding: 0.5rem;
+}
+
 input,
 select {
-  width: 100%;
+  width: calc(100% - 1rem);
+  margin: 0.5rem;
   border-radius: 0.25rem;
   border: 1px solid rgba(0, 0, 0, 0.3);
   padding: 0.5rem;
@@ -53,10 +69,15 @@ select {
 
 button {
   border-radius: 0.25rem;
-  border: 1px solid rgba(0,0,0,0.3);
-  margin: 0 0.5rem;
-  padding: 0.125rem;
-  background: rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  margin: 0.5rem;
+  padding: 0.125rem 0.5rem;
+  background: rgba(0, 0, 0, 0.1);
+  line-height: 24px;
+}
+
+button .material-icons {
+  vertical-align: middle;
 }
 
 table {
@@ -99,7 +120,6 @@ td {
   animation: loading infinite 1000ms;
 }
 
-
 @keyframes loading {
   0% {
     width: 0;
@@ -113,4 +133,30 @@ td {
     left: 100%;
     width: 0%;
   }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10000;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 1rem;
+  margin: 1rem;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 0.25rem;
 }

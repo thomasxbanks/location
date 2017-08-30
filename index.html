@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Location</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -16,19 +16,18 @@
     <section id="loader">
       <form id="geolocation" action="">
         <fieldset>
-          <label>Location: <input name="address" type="text" value=""></label>
+          <label>Find your nearest bar:</label>
+          <input name="address" type="text" value="" placeholder="city, address, or postcode">
         </fieldset>
         <fieldset>
-          <label>
-            <select name="uod" id="uod">
-              <option selected value="mi">Miles</option>
-              <option value="km">Kilometers</option>
-            </select>
-          </label>
+          <select name="uod" id="uod">
+            <option selected value="mi">Miles</option>
+            <option value="km">Kilometers</option>
+          </select>
         </fieldset>
         <fieldset>
-          <button id="useSearchLocation" type="submit" class="material-icons">search</button>
-          <button id="useCurrentLocation" class="material-icons">my_location</button>
+          <button id="useSearchLocation" type="submit"><span class="material-icons">search</span> Search</button>
+          <button id="useCurrentLocation"><span class="material-icons">my_location</span> Use current location</button>
         </fieldset>
       </form>
     </section>

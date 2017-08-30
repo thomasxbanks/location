@@ -5,6 +5,11 @@ if (thisUrl.indexOf('localhost') > -1) {
 } else {
   var ENV = '/location/'
 }
+if (thisUrl.indexOf('https') > -1){
+  document.getElementById('useCurrentLocation').style.display = 'inline-block'
+} else {
+  document.getElementById('useCurrentLocation').style.display = 'none'
+}
 
 var geoCodingUri = 'https://maps.googleapis.com/maps/api/geocode/json'
 var geoLocationUri = 'https://www.googleapis.com/geolocation/v1/geolocate?key='
@@ -16,9 +21,11 @@ var loader = document.getElementById('loader')
 // Use current location
 document.getElementById('useCurrentLocation').addEventListener('click', function(e){
       loader.setAttribute('data-state', 'loading')
-      var startPos;
+      var startPos
+
       var geoSuccess = function(position) {
-        startPos = position;
+        startPos = position
+
         var point1 = {
           name: 'Your current location',
           lat: startPos.coords.latitude,
@@ -29,11 +36,11 @@ document.getElementById('useCurrentLocation').addEventListener('click', function
         var phpEndpoint = ENV + `?name=${point1.name.replace(/ /g, '+')}&lat=${point1.lat}&lng=${point1.lng}&uod=${uod}`
         
         window.location.href = phpEndpoint
-      };
-      navigator.geolocation.getCurrentPosition(geoSuccess);
+      }
+
+      navigator.geolocation.getCurrentPosition(geoSuccess)
       
-  
-  })
+})
 
 // use different location
 document.getElementById('geolocation').addEventListener('submit', function (e) {
