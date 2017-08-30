@@ -15,30 +15,25 @@ var apiKey = {
 
 // Use current location
 document.getElementById('useCurrentLocation').addEventListener('click', function(e){
-  var xmlhttp = new XMLHttpRequest()
-  xmlhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      var response = JSON.parse(this.responseText)
-      // log for debug
-      console.info(this.responseText)
-      var point1 = {
-        name: 'Your current location',
-        lat: response['location']['lat'],
-        lng: response['location']['lng']
-      }
+  
+      var startPos;
+      var geoSuccess = function(position) {
+        startPos = position;
+        var point1 = {
+          name: 'Your current location',
+          lat: startPos.coords.latitude,
+          lng: startPos.coords.longitude
+        }
+        
+        var uod = document.getElementById('uod').options[document.getElementById('uod').selectedIndex].value
+        var phpEndpoint = `/location/?name=${point1.name.replace(/ /g, '+')}&lat=${point1.lat}&lng=${point1.lng}&uod=${uod}`
+        
+        window.location.href = phpEndpoint
+      };
+      navigator.geolocation.getCurrentPosition(geoSuccess);
       
-      document.querySelector('main').innerHTML = "using lte: " + JSON.stringify(response)
-
-      var uod = document.getElementById('uod').options[document.getElementById('uod').selectedIndex].value
-      var phpEndpoint = ENV + `?name=${point1.name.replace(/ /g, '+')}&lat=${point1.lat}&lng=${point1.lng}&uod=${uod}`
-      
-      window.location.href = phpEndpoint
-    }
-  }
-  console.log(geoLocationUri + apiKey.geoLocationApiKey)
-  xmlhttp.open("POST", geoLocationUri + apiKey.geoLocationApiKey, true)
-  xmlhttp.send()
-})
+  
+  })
 
 // use different location
 document.getElementById('geolocation').addEventListener('submit', function (e) {
