@@ -1,5 +1,6 @@
 {
   "considerIp": "false",
+  "radioType": "lte",
   "wifiAccessPoints": [
     {
         "macAddress": "00:25:9c:cf:1c:ac",
