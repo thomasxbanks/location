@@ -1,9 +1,9 @@
 // Environment variables
 var thisUrl = window.location.href
-if (thisUrl.indexOf('thomasxbanks') > -1) {
-  var ENV = '/location/'
-} else {
+if (thisUrl.indexOf('localhost') > -1) {
   var ENV = '/'
+} else {
+  var ENV = '/location/'
 }
 
 var geoCodingUri = 'https://maps.googleapis.com/maps/api/geocode/json'
@@ -26,7 +26,7 @@ document.getElementById('useCurrentLocation').addEventListener('click', function
         }
         
         var uod = document.getElementById('uod').options[document.getElementById('uod').selectedIndex].value
-        var phpEndpoint = `/location/?name=${point1.name.replace(/ /g, '+')}&lat=${point1.lat}&lng=${point1.lng}&uod=${uod}`
+        var phpEndpoint = ENV + `?name=${point1.name.replace(/ /g, '+')}&lat=${point1.lat}&lng=${point1.lng}&uod=${uod}`
         
         window.location.href = phpEndpoint
       };
@@ -156,12 +156,12 @@ points2.sort(function(a, b) {
 function makeRow(point1, point2){
   return `
     <tr>
-      <td>${point1.name.replace(/\+/g, ' ')}</td>
       <td>${point2.name}</td>
       <td>${point2.distance} ${uod}</td>
     </tr>
   `
 }
+document.querySelector('#from').innerText = point1.name.replace(/\+/g," ")
 for (i = 0; i < points2.length; i++) {
   document.querySelector('table').innerHTML += makeRow(point1, points2[i])
 };
