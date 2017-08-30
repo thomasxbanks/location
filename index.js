@@ -47,7 +47,7 @@ document.getElementById('geolocation').addEventListener('submit', function (e) {
   e.preventDefault()
   loader.setAttribute('data-state', 'loading')
   var rawValue = e.currentTarget.getElementsByTagName('input')[0].value
-  var apiEndpoint = '?address=' + rawValue.replace(' ', '+') + '&key=' + apiKey.geoCodingApiKey
+  var apiEndpoint = '?address=' + rawValue.replace(' ', '+') + ', United Kingdom&key=' + apiKey.geoCodingApiKey
   console.log('submit', apiEndpoint)
 
   var xmlhttp = new XMLHttpRequest()
